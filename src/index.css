@@ -1,0 +1,91 @@
+:root {
+  --verde-50: #e0f5f1;
+  --verde-100: #c5ede5;
+  --verde-200: #8bdaca;
+  --verde-300: #50c8b0;
+  --verde-400: #309783;
+  --verde-500: #1d5d50;
+  --verde-600: #0b231e;
+  --verde-700: #091b17;
+  --verde-800: #061311;
+  --verde-900: #020807;
+  --verde-950: #010403;
+
+  --dorado-50: #f9f6f1;
+  --dorado-100: #f3ede3;
+  --dorado-200: #e5d9c3;
+  --dorado-300: #d4c19c;
+  --dorado-400: #cab486;
+  --dorado-500: #c0a46d;
+  --dorado-600: #b39251;
+  --dorado-700: #9c7f44;
+  --dorado-800: #846b39;
+  --dorado-900: #604e2a;
+  --dorado-950: #44371d;
+
+  --blanco-50: #ffffff;
+  --blanco-100: #ffffff;
+  --blanco-200: #ffffff;
+  --blanco-300: #ffffff;
+  --blanco-400: #dbdbdb;
+  --blanco-500: #b5b5b5;
+  --blanco-600: #919191;
+  --blanco-700: #6e6e6e;
+  --blanco-800: #4a4a4a;
+  --blanco-900: #242424;
+  --blanco-950: #121212;
+
+  --rojo-50: #f9e6ec;
+  --rojo-100: #f4cdd9;
+  --rojo-200: #e797af;
+  --rojo-300: #dc6589;
+  --rojo-400: #cf3060;
+  --rojo-500: #9d2449;
+  --rojo-600: #7c1d39;
+  --rojo-700: #5f162c;
+  --rojo-800: #3e0e1d;
+  --rojo-900: #21080f;
+  --rojo-950: #110408;
+
+  --fuente-principal: "Montserrat", sans-serif;
+}
+* {
+  min-width: 0;
+  font: inherit;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img,
+video,
+svg {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--fuente-principal);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}

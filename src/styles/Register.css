@@ -1,0 +1,76 @@
+.register {
+  /* border: 1px solid black; */
+  height: 100dvh;
+  padding: 1rem;
+  width: 100%;
+}
+
+.register__title {
+  text-align: center;
+  font-size: 3rem;
+  color: var(--dorado-800);
+}
+
+.register__form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 4rem;
+  place-items: center;
+}
+
+.register__form-input,
+.register__form-select {
+  padding: 0.9rem;
+  border: 1px solid var(--verde-400);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register__form-input:active,
+.register__form-select:active {
+  transform: scale(1.06);
+}
+
+.register__form-input:focus,
+.register__form-select:focus {
+  outline: none;
+  border-color: var(--dorado-700);
+  box-shadow: 0 0 2px var(--verde-500);
+}
+
+.register__form-btn button {
+  padding: 0.7rem 4rem;
+  background-color: var(--verde-500);
+  color: var(--blanco-50);
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.register__form-btn button:hover {
+  transform: scale(1.06);
+  background-color: var(--dorado-700);
+}
+
+.register__links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+}
+
+.register__links p {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.register__links a {
+  color: var(--verde-500);
+  transition: text-decoration 0.3s ease, color 0.3s ease;
+}
+
+.register__links a:hover {
+  text-decoration: none;
+  color: var(--dorado-700);
+}

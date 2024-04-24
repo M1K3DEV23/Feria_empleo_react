@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  /* border: 1px solid red; */
+  height: 5rem;
+  background-color: var(--verde-600);
+}
+
+.header__logo img {
+  width: 8rem;
+}
+
+/* Hamburguesa */
+.header__nav-toggle {
+  display: none;
+}
+
+/* Menu normal */
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header__nav-menu-list {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+}
+
+.header__nav-menu-link {
+  text-decoration: none;
+  color: var(--blanco-200);
+  transition: text-decoration 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.header__nav-menu-link:hover {
+  text-decoration: underline;
+  color: var(--dorado-300);
+}
