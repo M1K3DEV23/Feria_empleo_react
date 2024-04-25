@@ -37,6 +37,9 @@ const Header: React.FC = () => {
             <li className="header__nav-menu-item">
               <Link to='/events'  className="header__nav-menu-link">Eventos</Link>
             </li>
+            <li className="header__nav-menu-item">
+              <Link to='/event-badge'  className="header__nav-menu-link">Gafete</Link>
+            </li>
           </ul>
         </nav>
       </div>

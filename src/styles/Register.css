@@ -1,8 +1,13 @@
 .register {
   /* border: 1px solid black; */
-  height: 100dvh;
+  min-height: 100dvh;
+  height: auto;
   padding: 1rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .register__title {
@@ -11,10 +16,18 @@
   color: var(--dorado-800);
 }
 
+.register__content {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .register__form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 4rem;
+  gap: 5rem;
   place-items: center;
 }
 
@@ -23,6 +36,11 @@
   padding: 0.9rem;
   border: 1px solid var(--verde-400);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register__form-input:hover,
+.register__form-select:hover {
+  border-color: var(--rojo-300);
 }
 
 .register__form-input:active,

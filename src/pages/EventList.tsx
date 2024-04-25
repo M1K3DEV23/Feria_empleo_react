@@ -1,25 +1,57 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 // Importando el modal
 import Modal from "../components/Modal";
 
 import '../styles/EventList.css'
 
+// Importando datos falsos
+
+const eventos = [
+  {
+    "clave_feria": 1,
+    "nombre_evento": "Feria de Empleo Tech",
+    "descripcion": "Encuentre oportunidades de carrera en el sector tecnológico.",
+    "ubicacion": "Tuxtla Gutierrez, Chiapas",
+    "fecha": "04 de Abril de 2024",
+    "hora_inicio": "12:00:00"
+  },
+  {
+    "clave_feria": 2,
+    "nombre_evento": "Expo Innovación",
+    "descripcion": "Descubra las últimas innovaciones en tecnología y negocios.",
+    "ubicacion": "Monterrey, Nuevo León",
+    "fecha": "15 de Mayo de 2024",
+    "hora_inicio": "10:00:00"
+  },
+  {
+    "clave_feria": 3,
+    "nombre_evento": "Conferencia de Inteligencia Artificial",
+    "fecha": "22 de Junio de 2024",
+    "descripcion": "Aprenda sobre las aplicaciones prácticas de la inteligencia artificial en diferentes industrias.",
+    "ubicacion": "Guadalajara, Jalisco",
+    "hora_inicio": "09:30:00"
+  }
+]
+
 interface Event {
   clave_feria: number;
   nombre_evento: string;
   fecha: string;
   hora_inicio: string;
-  hora_fin: string;
+  // hora_fin: string;
   ubicacion: string;
   descripcion: string;
 }
 
 const EventList: React.FC = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState(eventos);
+  // const [events, setEvents] = useState<Event[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentEvent, setCurrentEvent] = useState<Event | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -49,8 +81,12 @@ const EventList: React.FC = () => {
     setCurrentEvent(null);
   }
 
+  const handleConfirm = () => {
+    navigate('/event-badge');
+  }
 
   const filteredEvents = events.filter(evento => evento.nombre_evento.toLowerCase().includes(searchTerm.toLowerCase()));
+
 
 
   return (
@@ -78,10 +114,28 @@ const EventList: React.FC = () => {
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         {
           currentEvent && (
-            <div>
-              <h2>Registro para el Evento: {currentEvent.nombre_evento}</h2>
-              <button type="button">Confirmar Registro</button>
-            </div>
+            <>
+              <h3 className="modal__title">Confirmar registro</h3>
+              <p className="modal__text">
+                ¿Estás seguro de que deseas registrarte en <span>
+                {currentEvent.nombre_evento}</span>?
+              </p>
+              <div className="modal__content">
+                <form className="modal__form">
+                  <label htmlFor="hear-about" className="modal__label">Cómo te enteraste?</label>
+                  <select className="modal__select" name="hear-about" id="hear-about" required>
+                    <option value="1">Recomendación</option>
+                    <option value="2">Busqueda en Internet</option>
+                    <option value="3">Publicidad en línea</option>
+                    <option value="4">Redes sociales</option>
+                    <option value="5">Otros</option>
+                  </select>
+                  <div className="modal__buttons">
+                    <button className="modal__btn" type="submit" onClick={handleConfirm}>Confirmar</button>
+                  </div>
+                </form>
+              </div>
+            </>
           )
         }
       </Modal>

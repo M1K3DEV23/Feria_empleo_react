@@ -1,0 +1,62 @@
+.badge {
+  /* border: 1px solid red; */
+  width: 100%;
+  height: auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.badge__title-main {
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--dorado-900);
+}
+
+.badge__content {
+  /* border: 1px solid black; */
+  width: 50%;
+  height: auto;
+  background-color: var(--blanco-300);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.badge__content:hover {
+  box-shadow: 0 0 25px var(--dorado-700);
+  transform: translateY(-5px) scale(1.06);
+}
+
+.badge__header {
+  /* border: 1px solid red; */
+  display: flex;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.badge__title {
+  font-size: 2rem;
+  text-align: center;
+  color: var(--rojo-600);
+}
+
+.badge__description {
+  font-size: 18px;
+  text-align: center;
+}
+
+.badge__image {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
