@@ -48,6 +48,13 @@ const Register: React.FC = () => {
     })
   }
 
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setRegistrationData({
+      ...registrationData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -105,7 +112,7 @@ const Register: React.FC = () => {
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Género:</label> */}
-              <select name="sexo" id="sexo" className='register__form-select' value={registrationData.sexo}>
+              <select name="sexo" id="sexo" className='register__form-select' value={registrationData.sexo} onChange={handleSelectChange}>
                 <option value="">Selecciona una opción</option>
                 <option value="m">Masculino</option>
                 <option value="f">Femenino</option>
@@ -115,7 +122,7 @@ const Register: React.FC = () => {
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Código Postal:</label> */}
-              <input type="number" name="cp" id="cp" placeholder='Código Postal' className='register__form-input' value={registrationData.cp} />
+              <input type="number" name="cp" id="cp" placeholder='Código Postal' className='register__form-input' value={registrationData.cp} onChange={handleInputChange} />
             </div>
 
             <div>
