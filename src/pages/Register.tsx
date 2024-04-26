@@ -7,13 +7,13 @@ interface RegistrationData {
   nombre: string;
   paterno: string;
   materno:string;
-  sexo: number;
-  cp: number;
+  sexo: string;
+  cp: string;
   estado: string;
   ciudad: string;
   colonia: string;
   calle: string;
-  telefono: number;
+  telefono: string;
   email: string;
   password: string;
 
@@ -30,13 +30,13 @@ const Register: React.FC = () => {
     nombre:'',
     paterno:'',
     materno:'',
-    sexo: 0,
-    cp: 0,
+    sexo: '',
+    cp: '',
     estado:'',
     ciudad:'',
     colonia:'',
     calle:'',
-    telefono: 0,
+    telefono: '',
     email:'',
     password:''
   });
@@ -85,73 +85,73 @@ const Register: React.FC = () => {
 
             <div className='register__form-group'>
               {/* <label htmlFor="">RFC:</label> */}
-              <input type="text" name="rfc" id="rfc" placeholder='RFC' className='register__form-input' />
+              <input type="text" name="rfc" id="rfc" placeholder='RFC' className='register__form-input' value={registrationData.rfc} onChange={handleInputChange} />
             </div>
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Nombre:</label> */}
-              <input type="text" name="nombre" id="nombre" placeholder='Nombre' className='register__form-input' />
+              <input type="text" name="nombre" id="nombre" placeholder='Nombre' className='register__form-input' value={registrationData.nombre} onChange={handleInputChange} />
             </div>
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Apellido Paterno:</label> */}
-              <input type="text" name="paterno" id="paterno" placeholder='Apellido Paterno' className='register__form-input' />
+              <input type="text" name="paterno" id="paterno" placeholder='Apellido Paterno' className='register__form-input' value={registrationData.paterno} onChange={handleInputChange} />
             </div>
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Apellido Materno:</label> */}
-              <input type="text" name="materno" id="materno" placeholder='Apellido Materno' className='register__form-input' />
+              <input type="text" name="materno" id="materno" placeholder='Apellido Materno' className='register__form-input' value={registrationData.materno} onChange={handleInputChange} />
             </div>
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Género:</label> */}
-              <select name="sexo" id="sexo" className='register__form-select'>
+              <select name="sexo" id="sexo" className='register__form-select' value={registrationData.sexo}>
                 <option value="">Selecciona una opción</option>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otros">No Binario</option>
+                <option value="m">Masculino</option>
+                <option value="f">Femenino</option>
+                <option value="o">No Binario</option>
               </select>
             </div>
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Código Postal:</label> */}
-              <input type="number" name="cp" id="cp" placeholder='Código Postal' className='register__form-input' />
+              <input type="number" name="cp" id="cp" placeholder='Código Postal' className='register__form-input' value={registrationData.cp} />
             </div>
 
             <div>
               {/* <label htmlFor="">Estado:</label> */}
-              <input type="text" name="estado" id="estado" placeholder='Estado' className='register__form-input' />
+              <input type="text" name="estado" id="estado" placeholder='Estado' className='register__form-input' value={registrationData.estado} onChange={handleInputChange} />
             </div>
 
             <div>
               {/* <label htmlFor="">Ciudad:</label> */}
-              <input type="text" name="ciudad" id="ciudad" placeholder='Ciudad' className='register__form-input' />
+              <input type="text" name="ciudad" id="ciudad" placeholder='Ciudad' className='register__form-input' value={registrationData.ciudad} onChange={handleInputChange} />
             </div>
 
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Colonia:</label> */}
-              <input type="text" name="colonia" id="colonia" placeholder='Colonia' className='register__form-input' />
+              <input type="text" name="colonia" id="colonia" placeholder='Colonia' className='register__form-input' value={registrationData.colonia} onChange={handleInputChange} />
             </div>
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Dirección:</label> */}
-              <input type="text" name="calle" id="calle" placeholder='Dirección' className='register__form-input' />
+              <input type="text" name="calle" id="calle" placeholder='Dirección' className='register__form-input' value={registrationData.calle} onChange={handleInputChange}/>
             </div>
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Teléfono:</label> */}
-              <input type="tel" name="telefono" id="telefono" placeholder='Teléfono' className='register__form-input' />
+              <input type="tel" name="telefono" id="telefono" placeholder='Teléfono' className='register__form-input' value={registrationData.telefono} onChange={handleInputChange} />
             </div>
 
             <div className='register__form-group'>
               {/* <label htmlFor="">E-mail:</label> */}
-              <input type="email" name="email" id="email" placeholder='E-mail' className='register__form-input' />
+              <input type="email" name="email" id="email" placeholder='E-mail' className='register__form-input' value={registrationData.email} onChange={handleInputChange} />
             </div>
 
             <div className='register__form-group'>
               {/* <label htmlFor="">Contraseña:</label> */}
-              <input type="password" name="password" id="password" placeholder='Contraseña' className='register__form-input' />
+              <input type="password" name="password" id="password" placeholder='Contraseña' className='register__form-input' value={registrationData.password} onChange={handleInputChange} />
             </div>
 
             <div className='register__form-btn'>
