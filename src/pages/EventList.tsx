@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 // Importando el modal
 import Modal from "../components/Modal";
 
-import '../styles/EventList.css'
+import '../styles/EventList.css';
+
+import { motion } from "framer-motion";
 
 // Importando datos falsos
 
@@ -81,65 +83,89 @@ const EventList: React.FC = () => {
     setCurrentEvent(null);
   }
 
-  const handleConfirm = () => {
-    navigate('/event-badge');
-  }
+  const handleConfirm = async () => {
+    try {
+      if (currentEvent) {
+        const response = await fetch('/api/registrar-asistencia', {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            clave_feria: currentEvent.clave_feria,
+            nombre_evento: currentEvent.nombre_evento,
+            fecha: currentEvent.fecha
+          })
+        })
+        if (response.ok) {
+          console.log('Asistencia registrada exitosamente');
+          // Realizar acciones adicionales despues de registrar la asistencia exitosamente
+          navigate('/event-badge');
+        } else {
+          console.error('Error al registrar la asistencia');
+        }
+      }
+    } catch (error) {
+      console.error('Error al registrar la asistencia: ', error);
+    }
+  };
 
   const filteredEvents = events.filter(evento => evento.nombre_evento.toLowerCase().includes(searchTerm.toLowerCase()));
 
 
-
   return (
-    <div className="events">
-      <h2 className="events__title">Eventos Disponibles</h2>
-      <div className="events__search">
-        <span className="events__search-icon"><i></i></span>
-        <input className="events__search-input" type="search" placeholder="Buscar eventos..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-      </div>
+    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
+      <div className="events">
+        <h2 className="events__title">Eventos Disponibles</h2>
+        <div className="events__search">
+          <span className="events__search-icon"><i></i></span>
+          <input className="events__search-input" type="search" placeholder="Buscar eventos..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+        </div>
 
-      <div className="events__items">
-        {
-          filteredEvents.map(evento => (
-          <div className="events__item" key={evento.clave_feria}>
-            <h3 className="events__item-title">{evento.nombre_evento}</h3>
-            <p className="events__item-description">{evento.descripcion}</p>
-            <p className="events__item-location"><strong>Ubicacion &bull;</strong>{evento.ubicacion}</p>
-            <p className="events__item-date"><strong>Fecha:</strong>{evento.fecha}</p>
-            <p className="events__item-date"><strong>Horario:</strong>{evento.hora_inicio}</p>
-            <button onClick={() => openModalWithEvent(evento)} className="events__item-register" type="button">Registro</button>
-          </div>
-          ))
-        }
+        <div className="events__items">
+          {
+            filteredEvents.map(evento => (
+            <div  className="events__item" key={evento.clave_feria}>
+              <h3 className="events__item-title">{evento.nombre_evento}</h3>
+              <p className="events__item-description">{evento.descripcion}</p>
+              <p className="events__item-location"><strong>Ubicacion &bull;</strong>{evento.ubicacion}</p>
+              <p className="events__item-date"><strong>Fecha:</strong>{evento.fecha}</p>
+              <p className="events__item-date"><strong>Horario:</strong>{evento.hora_inicio}</p>
+              <button onClick={() => openModalWithEvent(evento)} className="events__item-register" type="button">Registro</button>
+            </div>
+            ))
+          }
+        </div>
+        <Modal isOpen={isModalOpen} onClose={closeModal}>
+          {
+            currentEvent && (
+              <>
+                <h3 className="modal__title">Confirmar registro</h3>
+                <p className="modal__text">
+                  ¿Estás seguro de que deseas registrarte en <span>
+                  {currentEvent.nombre_evento}</span>?
+                </p>
+                <div className="modal__content">
+                  <form className="modal__form">
+                    <label htmlFor="hear-about" className="modal__label">Cómo te enteraste?</label>
+                    <select className="modal__select" name="hear-about" id="hear-about" required>
+                      <option value="1">Recomendación</option>
+                      <option value="2">Busqueda en Internet</option>
+                      <option value="3">Publicidad en línea</option>
+                      <option value="4">Redes sociales</option>
+                      <option value="5">Otros</option>
+                    </select>
+                    <div className="modal__buttons">
+                      <button className="modal__btn" type="submit" onClick={handleConfirm}>Confirmar</button>
+                    </div>
+                  </form>
+                </div>
+              </>
+            )
+          }
+        </Modal>
       </div>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {
-          currentEvent && (
-            <>
-              <h3 className="modal__title">Confirmar registro</h3>
-              <p className="modal__text">
-                ¿Estás seguro de que deseas registrarte en <span>
-                {currentEvent.nombre_evento}</span>?
-              </p>
-              <div className="modal__content">
-                <form className="modal__form">
-                  <label htmlFor="hear-about" className="modal__label">Cómo te enteraste?</label>
-                  <select className="modal__select" name="hear-about" id="hear-about" required>
-                    <option value="1">Recomendación</option>
-                    <option value="2">Busqueda en Internet</option>
-                    <option value="3">Publicidad en línea</option>
-                    <option value="4">Redes sociales</option>
-                    <option value="5">Otros</option>
-                  </select>
-                  <div className="modal__buttons">
-                    <button className="modal__btn" type="submit" onClick={handleConfirm}>Confirmar</button>
-                  </div>
-                </form>
-              </div>
-            </>
-          )
-        }
-      </Modal>
-    </div>
+    </motion.div>
   )
 }
 

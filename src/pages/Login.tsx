@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { motion } from 'framer-motion';
+
 // Importando mi CSS
 import '../styles/Login.css'
 
@@ -52,34 +54,36 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className='login'>
-      <h2 className='login__title'>Iniciar Sesión</h2>
-      <form className='login__form' onSubmit={handleSubmit}>
+    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
+      <div className='login'>
+        <h2 className='login__title'>Iniciar Sesión</h2>
+        <form className='login__form' onSubmit={handleSubmit}>
 
-        <div className='login__form_group'>
-          <label htmlFor=""></label>
-          <input className='login__form-input' type="text" name="curp" id="curp" placeholder='CURP' value={loginCredentials.curp} onChange={handleInputChange} />
-        </div>
+          <div className='login__form_group'>
+            <label htmlFor=""></label>
+            <input className='login__form-input' type="text" name="curp" id="curp" placeholder='CURP' value={loginCredentials.curp} onChange={handleInputChange} />
+          </div>
 
-        <div className='login__form_group'>
-          <label htmlFor=""></label>
-          <input className='login__form-input' type="password" name="password" id="password" placeholder='Contraseña' value={loginCredentials.password} onChange={handleInputChange} />
-        </div>
+          <div className='login__form_group'>
+            <label htmlFor=""></label>
+            <input className='login__form-input' type="password" name="password" id="password" placeholder='Contraseña' value={loginCredentials.password} onChange={handleInputChange} />
+          </div>
 
-        <div className='login__form-group'>
-          <button type="submit" className='login__form-submit'>Iniciar sesión</button>
-        </div>
+          <div className='login__form-group'>
+            <button type="submit" className='login__form-submit'>Iniciar sesión</button>
+          </div>
 
-        <div className='login__links'>
-          <p>
-            ¿Olvidaste tu contraseña? <Link className='login__link' to="/reset-contrasena">Recuperala</Link>
-          </p>
-          <p>
-            ¿No tienes cuenta? <Link className='login__link' to="/register">Registrate</Link>
-          </p>
-        </div>
-      </form>
-    </div>
+          <div className='login__links'>
+            <p>
+              ¿Olvidaste tu contraseña? <Link className='login__link' to="/reset-contrasena">Recuperala</Link>
+            </p>
+            <p>
+              ¿No tienes cuenta? <Link className='login__link' to="/register">Registrate</Link>
+            </p>
+          </div>
+        </form>
+      </div>
+    </motion.div>
   )
 }
 
