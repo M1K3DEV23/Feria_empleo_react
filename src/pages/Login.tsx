@@ -8,13 +8,13 @@ import '../styles/Login.css'
 
 interface LoginCredentials {
   curp: string;
-  password: string;
+  contrasena: string;
 }
 const Login: React.FC = () => {
 
   const [loginCredentials, setLoginCredentials] = useState<LoginCredentials>({
     curp: '',
-    password: '',
+    contrasena: '',
   });
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,7 +66,7 @@ const Login: React.FC = () => {
 
           <div className='login__form_group'>
             <label htmlFor=""></label>
-            <input className='login__form-input' type="password" name="password" id="password" placeholder='Contraseña' value={loginCredentials.password} onChange={handleInputChange} />
+            <input className='login__form-input' type="contrasena" name="contrasena" id="contrasena" placeholder='Contraseña' value={loginCredentials.contrasena} onChange={handleInputChange} />
           </div>
 
           <div className='login__form-group'>
