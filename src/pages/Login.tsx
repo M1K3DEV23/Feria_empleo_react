@@ -19,6 +19,9 @@ const Login: React.FC = () => {
     contrasena: '',
   });
 
+  const [error, setError] = useState<string>('');
+  const [showAlert, setShowAlert] = useState<boolean>(false);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLoginCredentials({
       ...loginCredentials,
@@ -42,9 +45,12 @@ const Login: React.FC = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        <Alert severity='warning'>This is a alert</Alert>
+        setError(data.error);
+        setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 5000);
         console.error(data);
-
         throw new Error(`Error: ${response.status}`);
       }
       console.log('Login successful: ', data);
@@ -78,6 +84,12 @@ const Login: React.FC = () => {
           <div className='login__form-group'>
             <button type="submit" className='login__form-submit'>Iniciar sesión</button>
           </div>
+
+          {
+            showAlert && (
+              <Alert severity='warning'>{error}</Alert>
+            )
+          }
 
           <div className='login__links'>
             <p>
