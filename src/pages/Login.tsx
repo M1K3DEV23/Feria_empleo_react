@@ -31,16 +31,18 @@ const Login: React.FC = () => {
       const response = await fetch('http://127.0.0.1:8000/api/login', {
         method: "POST",
         headers: {
+          'Accept': "application/json",
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginCredentials),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
+        console.error(data);
         throw new Error(`Error: ${response.status}`);
       }
-
-      const data = await response.json();
       console.log('Login successful: ', data);
 
       // Almacenar el token de acceso en el almacenamiento local
@@ -66,7 +68,7 @@ const Login: React.FC = () => {
 
           <div className='login__form_group'>
             <label htmlFor=""></label>
-            <input className='login__form-input' type="contrasena" name="contrasena" id="contrasena" placeholder='Contraseña' value={loginCredentials.contrasena} onChange={handleInputChange} />
+            <input className='login__form-input' type="password" name="contrasena" id="contrasena" placeholder='Contraseña' value={loginCredentials.contrasena} onChange={handleInputChange} />
           </div>
 
           <div className='login__form-group'>

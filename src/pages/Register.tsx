@@ -62,15 +62,17 @@ const Register: React.FC = () => {
       const response = await fetch('http://127.0.0.1:8000/api/register', {
         method: 'POST',
         headers: {
+          'Accept': "application/json",
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(registrationData),
       })
+      const data = await response.json();
 
       if (!response.ok) {
+        console.log(data);
         throw new Error(`Error: ${response.status}`);
       }
-      const data = await response.json();
       console.log('Registration successful: ', data);
       // Aquí puedes manejar la respuesta del servidor, como redirigir al usuario a la página de inicio o mostrar un mensaje de éxito
     } catch (error) {
