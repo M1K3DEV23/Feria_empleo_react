@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { motion } from 'framer-motion';
 
+import Alert from '@mui/material/Alert';
+
 // Importando mi CSS
 import '../styles/Login.css'
 
@@ -40,7 +42,9 @@ const Login: React.FC = () => {
       const data = await response.json();
 
       if (!response.ok) {
+        <Alert severity='warning'>This is a alert</Alert>
         console.error(data);
+
         throw new Error(`Error: ${response.status}`);
       }
       console.log('Login successful: ', data);
