@@ -69,6 +69,11 @@ const Login: React.FC = () => {
     <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
       <div className='login'>
         <h2 className='login__title'>Iniciar Sesión</h2>
+        {
+            showAlert && (
+              <Alert severity='warning'>{error}</Alert>
+            )
+          }
         <form className='login__form' onSubmit={handleSubmit}>
 
           <div className='login__form_group'>
@@ -84,12 +89,6 @@ const Login: React.FC = () => {
           <div className='login__form-group'>
             <button type="submit" className='login__form-submit'>Iniciar sesión</button>
           </div>
-
-          {
-            showAlert && (
-              <Alert severity='warning'>{error}</Alert>
-            )
-          }
 
           <div className='login__links'>
             <p>
