@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { motion } from 'framer-motion';
-
-import Alert from '@mui/material/Alert';
 
 // Importando mi CSS
 import '../styles/Login.css'
@@ -18,9 +16,7 @@ const Login: React.FC = () => {
     curp: '',
     password: '',
   });
-
-  const [error, setError] = useState<string>('');
-  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLoginCredentials({
@@ -45,18 +41,18 @@ const Login: React.FC = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.curp);
-        setShowAlert(true);
-        setTimeout(() => {
-          setShowAlert(false);
-        }, 5000);
-        console.error(data);
         throw new Error(`Error: ${response.status}`);
       }
-      console.log('Login successful: ', data);
 
       // Almacenar el token de acceso en el almacenamiento local
       localStorage.setItem('token', data.token);
+      localStorage.setItem('usuario', data.curp);
+
+      alert('Inicio de sesión exitoso');
+
+      setTimeout(() => {
+        navigate('/events');
+      }, 5000);
 
     } catch(error) {
       console.error('Login failed: ', error)
@@ -68,20 +64,15 @@ const Login: React.FC = () => {
     <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
       <div className='login'>
         <h2 className='login__title'>Iniciar Sesión</h2>
-        {
-            showAlert && (
-              <Alert severity='warning'>{error}</Alert>
-            )
-          }
         <form className='login__form' onSubmit={handleSubmit}>
 
           <div className='login__form_group'>
-            <label htmlFor=""></label>
+            {/* <label htmlFor=""></label> */}
             <input className='login__form-input' type="text" name="curp" id="curp" placeholder='CURP' value={loginCredentials.curp} onChange={handleInputChange} />
           </div>
 
           <div className='login__form_group'>
-            <label htmlFor=""></label>
+            {/* <label htmlFor=""></label> */}
             <input className='login__form-input' type="password" name="password" id="password" placeholder='Contraseña' value={loginCredentials.password} onChange={handleInputChange} />
           </div>
 

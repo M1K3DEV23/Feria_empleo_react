@@ -3,7 +3,7 @@ import QRCode from "qrcode.react";
 
 interface QRCodeGeneratorProps {
   curp: string;
-  eventId: number;
+  eventId: string;
 };
 
 const QRCodeGenerator: React.FC<QRCodeGeneratorProps> = ({curp, eventId}) => {

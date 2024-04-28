@@ -1,44 +1,12 @@
 import React, { useState, useEffect } from "react";
 // import { useNavigate } from 'react-router-dom';
-
 // Importando el modal
 import Modal from "../components/Modal";
-
 import '../styles/EventList.css';
-
 import { motion } from "framer-motion";
 
-// Importando datos falsos
-
-// const eventos = [
-//   {
-//     "clave_feria": 1,
-//     "nombre_evento": "Feria de Empleo Tech",
-//     "descripcion": "Encuentre oportunidades de carrera en el sector tecnológico.",
-//     "ubicacion": "Tuxtla Gutierrez, Chiapas",
-//     "fecha": "04 de Abril de 2024",
-//     "hora_inicio": "12:00:00"
-//   },
-//   {
-//     "clave_feria": 2,
-//     "nombre_evento": "Expo Innovación",
-//     "descripcion": "Descubra las últimas innovaciones en tecnología y negocios.",
-//     "ubicacion": "Monterrey, Nuevo León",
-//     "fecha": "15 de Mayo de 2024",
-//     "hora_inicio": "10:00:00"
-//   },
-//   {
-//     "clave_feria": 3,
-//     "nombre_evento": "Conferencia de Inteligencia Artificial",
-//     "fecha": "22 de Junio de 2024",
-//     "descripcion": "Aprenda sobre las aplicaciones prácticas de la inteligencia artificial en diferentes industrias.",
-//     "ubicacion": "Guadalajara, Jalisco",
-//     "hora_inicio": "09:30:00"
-//   }
-// ]
-
 interface Event {
-  id: number;
+  id: string;
   nombre: string;
   descripcion: string;
   ubicacion: string;
@@ -114,7 +82,6 @@ const EventList: React.FC = () => {
     }
   };
 
-
   const filteredEvents = events.filter(evento => evento.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
 
 
@@ -173,6 +140,4 @@ const EventList: React.FC = () => {
     </motion.div>
   )
 }
-
-
 export default EventList;
