@@ -10,13 +10,13 @@ import '../styles/Login.css'
 
 interface LoginCredentials {
   curp: string;
-  contrasena: string;
+  password: string;
 }
 const Login: React.FC = () => {
 
   const [loginCredentials, setLoginCredentials] = useState<LoginCredentials>({
     curp: '',
-    contrasena: '',
+    password: '',
   });
 
   const [error, setError] = useState<string>('');
@@ -33,10 +33,10 @@ const Login: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch('http://localhost:3000/login', {
         method: "POST",
         headers: {
-          'Accept': "application/json",
+          // 'Accept': "application/json",
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginCredentials),
@@ -45,7 +45,7 @@ const Login: React.FC = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error);
+        setError(data.curp);
         setShowAlert(true);
         setTimeout(() => {
           setShowAlert(false);
@@ -56,8 +56,7 @@ const Login: React.FC = () => {
       console.log('Login successful: ', data);
 
       // Almacenar el token de acceso en el almacenamiento local
-      localStorage.setItem('access_token', data.access_token);
-      localStorage.setItem('token_type', data.token_type);
+      localStorage.setItem('token', data.token);
 
     } catch(error) {
       console.error('Login failed: ', error)
@@ -83,7 +82,7 @@ const Login: React.FC = () => {
 
           <div className='login__form_group'>
             <label htmlFor=""></label>
-            <input className='login__form-input' type="password" name="contrasena" id="contrasena" placeholder='Contraseña' value={loginCredentials.contrasena} onChange={handleInputChange} />
+            <input className='login__form-input' type="password" name="password" id="password" placeholder='Contraseña' value={loginCredentials.password} onChange={handleInputChange} />
           </div>
 
           <div className='login__form-group'>
@@ -92,7 +91,7 @@ const Login: React.FC = () => {
 
           <div className='login__links'>
             <p>
-              ¿Olvidaste tu contraseña? <Link className='login__link' to="/reset-contrasena">Recuperala</Link>
+              ¿Olvidaste tu contraseña? <Link className='login__link' to="/reset-password">Recuperala</Link>
             </p>
             <p>
               ¿No tienes cuenta? <Link className='login__link' to="/register">Registrate</Link>

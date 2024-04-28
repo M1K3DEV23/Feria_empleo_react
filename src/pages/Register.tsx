@@ -59,7 +59,7 @@ const Register: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/register', {
+      const response = await fetch('http://localhost:3000/register', {
         method: 'POST',
         headers: {
           'Accept': "application/json",
@@ -116,9 +116,9 @@ const Register: React.FC = () => {
               {/* <label htmlFor="">Género:</label> */}
               <select name="sexo" id="sexo" className='register__form-select' value={registrationData.sexo} onChange={handleSelectChange}>
                 <option value="">Selecciona una opción</option>
-                <option value="m">Masculino</option>
-                <option value="f">Femenino</option>
-                <option value="o">No Binario</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                <option value="O">No Binario</option>
               </select>
             </div>
 

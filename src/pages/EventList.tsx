@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 // Importando el modal
 import Modal from "../components/Modal";
@@ -10,55 +10,60 @@ import { motion } from "framer-motion";
 
 // Importando datos falsos
 
-const eventos = [
-  {
-    "clave_feria": 1,
-    "nombre_evento": "Feria de Empleo Tech",
-    "descripcion": "Encuentre oportunidades de carrera en el sector tecnológico.",
-    "ubicacion": "Tuxtla Gutierrez, Chiapas",
-    "fecha": "04 de Abril de 2024",
-    "hora_inicio": "12:00:00"
-  },
-  {
-    "clave_feria": 2,
-    "nombre_evento": "Expo Innovación",
-    "descripcion": "Descubra las últimas innovaciones en tecnología y negocios.",
-    "ubicacion": "Monterrey, Nuevo León",
-    "fecha": "15 de Mayo de 2024",
-    "hora_inicio": "10:00:00"
-  },
-  {
-    "clave_feria": 3,
-    "nombre_evento": "Conferencia de Inteligencia Artificial",
-    "fecha": "22 de Junio de 2024",
-    "descripcion": "Aprenda sobre las aplicaciones prácticas de la inteligencia artificial en diferentes industrias.",
-    "ubicacion": "Guadalajara, Jalisco",
-    "hora_inicio": "09:30:00"
-  }
-]
+// const eventos = [
+//   {
+//     "clave_feria": 1,
+//     "nombre_evento": "Feria de Empleo Tech",
+//     "descripcion": "Encuentre oportunidades de carrera en el sector tecnológico.",
+//     "ubicacion": "Tuxtla Gutierrez, Chiapas",
+//     "fecha": "04 de Abril de 2024",
+//     "hora_inicio": "12:00:00"
+//   },
+//   {
+//     "clave_feria": 2,
+//     "nombre_evento": "Expo Innovación",
+//     "descripcion": "Descubra las últimas innovaciones en tecnología y negocios.",
+//     "ubicacion": "Monterrey, Nuevo León",
+//     "fecha": "15 de Mayo de 2024",
+//     "hora_inicio": "10:00:00"
+//   },
+//   {
+//     "clave_feria": 3,
+//     "nombre_evento": "Conferencia de Inteligencia Artificial",
+//     "fecha": "22 de Junio de 2024",
+//     "descripcion": "Aprenda sobre las aplicaciones prácticas de la inteligencia artificial en diferentes industrias.",
+//     "ubicacion": "Guadalajara, Jalisco",
+//     "hora_inicio": "09:30:00"
+//   }
+// ]
 
 interface Event {
-  clave_feria: number;
-  nombre_evento: string;
-  fecha: string;
-  hora_inicio: string;
-  // hora_fin: string;
-  ubicacion: string;
+  id: number;
+  nombre: string;
   descripcion: string;
+  ubicacion: string;
+  tipo: string;
+  fecha: string;
+  hora: string;
 }
 
 const EventList: React.FC = () => {
-  const [events, setEvents] = useState(eventos);
-  // const [events, setEvents] = useState<Event[]>([]);
+  // const [events, setEvents] = useState(eventos);
+  const [events, setEvents] = useState<Event[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentEvent, setCurrentEvent] = useState<Event | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/Fair');
+        const token = localStorage.getItem('token');
+        const response = await fetch('http://localhost:3000/eventos', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error (`Error: ${response.status}`)
         }
@@ -83,26 +88,25 @@ const EventList: React.FC = () => {
     setCurrentEvent(null);
   }
 
-  const handleConfirm = async () => {
+  const handleConfirm = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
     try {
-      if (currentEvent) {
-        const response = await fetch('/api/registrar-asistencia', {
+      const token = localStorage.getItem('token');
+      if (currentEvent && token) {
+        const response = await fetch(`http://localhost:3000/eventos/${currentEvent.id}/registrar`, {
           method: "POST",
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
-          body: JSON.stringify({
-            clave_feria: currentEvent.clave_feria,
-            nombre_evento: currentEvent.nombre_evento,
-            fecha: currentEvent.fecha
-          })
         })
+        const data = await response.json();
         if (response.ok) {
-          console.log('Asistencia registrada exitosamente');
+          console.log(data);
           // Realizar acciones adicionales despues de registrar la asistencia exitosamente
-          navigate('/event-badge');
+          // navigate('/event-badge');
         } else {
-          console.error('Error al registrar la asistencia');
+          console.error(data);
         }
       }
     } catch (error) {
@@ -110,7 +114,8 @@ const EventList: React.FC = () => {
     }
   };
 
-  const filteredEvents = events.filter(evento => evento.nombre_evento.toLowerCase().includes(searchTerm.toLowerCase()));
+
+  const filteredEvents = events.filter(evento => evento.nombre.toLowerCase().includes(searchTerm.toLowerCase()));
 
 
   return (
@@ -125,12 +130,12 @@ const EventList: React.FC = () => {
         <div className="events__items">
           {
             filteredEvents.map(evento => (
-            <div  className="events__item" key={evento.clave_feria}>
-              <h3 className="events__item-title">{evento.nombre_evento}</h3>
+            <div  className="events__item" key={evento.id}>
+              <h3 className="events__item-title">{evento.nombre}</h3>
               <p className="events__item-description">{evento.descripcion}</p>
               <p className="events__item-location"><strong>Ubicacion &bull;</strong>{evento.ubicacion}</p>
               <p className="events__item-date"><strong>Fecha:</strong>{evento.fecha}</p>
-              <p className="events__item-date"><strong>Horario:</strong>{evento.hora_inicio}</p>
+              <p className="events__item-date"><strong>Horario:</strong>{evento.hora}</p>
               <button onClick={() => openModalWithEvent(evento)} className="events__item-register" type="button">Registro</button>
             </div>
             ))
@@ -143,7 +148,7 @@ const EventList: React.FC = () => {
                 <h3 className="modal__title">Confirmar registro</h3>
                 <p className="modal__text">
                   ¿Estás seguro de que deseas registrarte en <span>
-                  {currentEvent.nombre_evento}</span>?
+                  {currentEvent.nombre}</span>?
                 </p>
                 <div className="modal__content">
                   <form className="modal__form">
