@@ -115,7 +115,7 @@ const EventList: React.FC = () => {
                 <h3 className="modal__title">Confirmar registro</h3>
                 <p className="modal__text">
                   ¿Estás seguro de que deseas registrarte en <span>
-                  {currentEvent.nombre}</span>?
+                  {currentEvent.nombre}</span>
                 </p>
                 <div className="modal__content">
                   <form className="modal__form">

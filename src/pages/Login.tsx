@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { motion } from 'framer-motion';
 
@@ -16,7 +16,7 @@ const Login: React.FC = () => {
     curp: '',
     password: '',
   });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLoginCredentials({
@@ -51,8 +51,8 @@ const Login: React.FC = () => {
       alert('Inicio de sesión exitoso');
 
       setTimeout(() => {
-        navigate('/events');
-      }, 5000);
+        window.location.href = '/events';
+      }, 3000);
 
     } catch(error) {
       console.error('Login failed: ', error)
