@@ -12,23 +12,11 @@
   width: 8rem;
 }
 
-/* Hamburguesa */
-.header__nav-toggle {
-  display: none;
-}
-
 /* Menu normal */
-
-.header__nav {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
 .header__nav-menu-list {
   display: flex;
   list-style: none;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .header__nav-menu-link {
@@ -70,4 +58,22 @@
 
 .header__nav-menu-btn-close:hover {
   background-color: var(--rojo-400);
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    row-gap: 1.5rem;
+  }
+
+  .header__logo img {
+    width: 15rem;
+  }
+
+  .header__nav-menu-list {
+    gap: 0.8rem;
+  }
 }

@@ -13,7 +13,7 @@
 .login__title {
   text-align: center;
   font-size: 3rem;
-  color: var(--dorado-900);
+  color: var(--dorado-800);
 }
 
 .login__form {
@@ -80,4 +80,10 @@
 .login__links a:hover {
   text-decoration: none;
   color: var(--dorado-700);
+}
+
+@media screen and (max-width: 768px) {
+  .login__title {
+    font-size: 2rem;
+  }
 }

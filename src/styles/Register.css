@@ -1,9 +1,9 @@
 .register {
   /* border: 1px solid black; */
-  min-height: 100dvh;
-  height: auto;
-  padding: 1rem;
   width: 100%;
+  height: auto;
+  min-height: 100dvh;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,4 +91,10 @@
 .register__links a:hover {
   text-decoration: none;
   color: var(--dorado-700);
+}
+
+@media screen and (max-width: 768px) {
+  .register__title {
+    font-size: 2rem;
+  }
 }

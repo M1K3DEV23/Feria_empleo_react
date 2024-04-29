@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from 'react-router-dom';
 
 // Importar el logo
@@ -15,6 +14,7 @@ const Header: React.FC = () => {
   // Determinar si el usuario esta logeado
   const isLoggendIn = !! token;
 
+
   // Funcion para cerrar session
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -26,14 +26,6 @@ const Header: React.FC = () => {
         <img src={escudoBlanco} alt="Escudo del Estado de Chiapas" />
       </div>
       <div className="header__nav">
-        <div className="header__nav-toggle">
-          <button className="header__nav-toggle-btn">
-            <span className="header__nav-toggle-icon">
-              <i></i>
-              <i></i>
-            </span>
-          </button>
-        </div>
         <nav className="header__nav-menu">
           <ul className="header__nav-menu-list">
             <li className="header__nav-menu-item">

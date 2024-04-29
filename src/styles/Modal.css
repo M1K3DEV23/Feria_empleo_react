@@ -16,7 +16,7 @@
 
 .modal__title {
   font-size: 2rem;
-  color: var(--dorado-900);
+  color: var(--dorado-800);
   text-align: center;
 }
 
@@ -67,7 +67,7 @@
 }
 
 .modal__buttons {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .modal__btn {
@@ -105,4 +105,19 @@
 
 .btn-close:hover {
   background-color: var(--rojo-400);
+}
+
+@media screen and (max-width: 768px) {
+  .Modal {
+    width: 85%;
+    top: 15%;
+  }
+
+  .modal__title {
+    font-size: 1.6rem;
+  }
+
+  .modal__text {
+    font-size: 16px;
+  }
 }
