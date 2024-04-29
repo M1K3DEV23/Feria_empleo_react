@@ -18,6 +18,7 @@ const Header: React.FC = () => {
   // Funcion para cerrar session
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
     window.location.href = '/';
   }
   return (

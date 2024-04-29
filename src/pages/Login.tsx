@@ -4,7 +4,21 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 // Importando mi CSS
-import '../styles/Login.css'
+import '../styles/Login.css';
+
+// Importando tooltips
+import { ToastContainer, ToastOptions, Zoom, toast } from 'react-toastify';
+import 'react-toastify/ReactToastify.min.css';
+
+const toastOptions: ToastOptions = {
+  position: 'top-center',
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: false,
+  pauseOnFocusLoss: false,
+  transition: Zoom
+}
 
 interface LoginCredentials {
   curp: string;
@@ -48,32 +62,35 @@ const Login: React.FC = () => {
       localStorage.setItem('token', data.token);
       localStorage.setItem('usuario', data.curp);
 
-      alert('Inicio de sesión exitoso');
+      toast.success('Inicio de sesión exitoso!', toastOptions)
+
 
       setTimeout(() => {
         window.location.href = '/events';
-      }, 3000);
+      }, 2500);
 
     } catch(error) {
-      console.error('Login failed: ', error)
-      // Aquí puedes manejar errores de red o de validación del servidor.
+      // console.error('Login failed: ', error)
+      // // Aquí puedes manejar errores de red o de validación del servidor.
+      toast.error('Error al iniciar sesión', toastOptions)
     }
   }
 
   return (
     <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
       <div className='login'>
+        <ToastContainer />
         <h2 className='login__title'>Iniciar Sesión</h2>
         <form className='login__form' onSubmit={handleSubmit}>
 
           <div className='login__form_group'>
             {/* <label htmlFor=""></label> */}
-            <input className='login__form-input' type="text" name="curp" id="curp" placeholder='CURP' value={loginCredentials.curp} onChange={handleInputChange} />
+            <input className='login__form-input' type="text" name="curp" id="curp" placeholder='CURP' value={loginCredentials.curp} onChange={handleInputChange} required />
           </div>
 
           <div className='login__form_group'>
             {/* <label htmlFor=""></label> */}
-            <input className='login__form-input' type="password" name="password" id="password" placeholder='Contraseña' value={loginCredentials.password} onChange={handleInputChange} />
+            <input className='login__form-input' type="password" name="password" id="password" placeholder='Contraseña' value={loginCredentials.password} onChange={handleInputChange} required />
           </div>
 
           <div className='login__form-group'>

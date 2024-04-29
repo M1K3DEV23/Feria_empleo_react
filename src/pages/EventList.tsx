@@ -5,6 +5,10 @@ import Modal from "../components/Modal";
 import '../styles/EventList.css';
 import { motion } from "framer-motion";
 
+// Importando tooltips
+import { Bounce, ToastContainer, ToastOptions, toast } from 'react-toastify';
+import 'react-toastify/ReactToastify.min.css';
+
 interface Event {
   id: string;
   nombre: string;
@@ -13,6 +17,16 @@ interface Event {
   tipo: string;
   fecha: string;
   hora: string;
+}
+
+const toastOptions: ToastOptions = {
+  position: 'top-center',
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: false,
+  pauseOnFocusLoss: false,
+  transition: Bounce
 }
 
 const EventList: React.FC = () => {
@@ -72,13 +86,17 @@ const EventList: React.FC = () => {
         if (response.ok) {
           console.log(data);
           // Realizar acciones adicionales despues de registrar la asistencia exitosamente
-          // navigate('/event-badge');
+          toast.success(data.message, toastOptions);
+
+          setTimeout(() => {
+            window.location.href = '/event-badge';
+          }, 2500);
         } else {
-          console.error(data);
+          toast.warn(data.error, toastOptions);
         }
       }
     } catch (error) {
-      console.error('Error al registrar la asistencia: ', error);
+      console.error('Error al registrar al evento: ', error);
     }
   };
 
@@ -108,6 +126,7 @@ const EventList: React.FC = () => {
             ))
           }
         </div>
+        <ToastContainer />
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {
             currentEvent && (
