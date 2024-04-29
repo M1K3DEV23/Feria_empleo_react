@@ -37,9 +37,9 @@ interface NextEvent {
 const EventBadge: React.FC = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [nextEvent, setNextEvent] = useState<NextEvent | null>(null);
-  const curp = localStorage.getItem('usuario');
-  const token = localStorage.getItem('token');
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    const curp = localStorage.getItem('usuario');
     const fetchUserData = async () => {
       const response = await fetch(`http://localhost:3000/usuario/${curp}`, {
         headers: {
@@ -56,8 +56,21 @@ const EventBadge: React.FC = () => {
           'Authorization': `Bearer ${token}`
         }
       });
+
       const data = await response.json();
-      setNextEvent(data);
+
+      // Formatear la fecha del proximo evento
+      if (data && data.fecha) {
+        const date = new Date(data.fecha);
+        const formattedDate = date.toLocaleDateString('es-MX', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        });
+        setNextEvent({ ...data, fecha: formattedDate });
+      } else {
+        setNextEvent(data);
+      }
     };
 
     fetchUserData();

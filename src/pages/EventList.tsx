@@ -50,7 +50,20 @@ const EventList: React.FC = () => {
           throw new Error (`Error: ${response.status}`)
         }
         const data = await response.json();
-        setEvents(data);
+        // Formatear la fecha para cada evento
+        const formattedEvents = data.map((event: Event) => {
+          const date = new Date(event.fecha);
+          const formattedDate = date.toLocaleDateString('es-MX', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          });
+          return {
+            ...event,
+            fecha: formattedDate,
+          };
+        });
+        setEvents(formattedEvents);
       } catch (error) {
         console.error('Error fetching events: ', error)
       }
@@ -84,7 +97,6 @@ const EventList: React.FC = () => {
         })
         const data = await response.json();
         if (response.ok) {
-          console.log(data);
           // Realizar acciones adicionales despues de registrar la asistencia exitosamente
           toast.success(data.message, toastOptions);
 
