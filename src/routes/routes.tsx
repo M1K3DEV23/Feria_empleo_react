@@ -6,10 +6,10 @@ import Register from '../pages/Register.tsx';
 import Login from '../pages/Login.tsx';
 import EventList from '../pages/EventList.tsx';
 import EventBadge from '../pages/EventBadge.tsx';
-// import ProtectedRoute from './ProtectedRoute.tsx';
 import Home from '../pages/Home.tsx';
 import EventScanner from '../pages/EventScanner.tsx';
-
+import CountdownTimer from '../pages/CountdownTimer.tsx';
+// import ProtectedRoute from './ProtectedRoute.tsx';
 
 
 
@@ -31,6 +31,7 @@ const AppRoutes: React.FC = () => {
         <Route path='/events' element={<EventList />} />
         <Route path='/event-badge' element={<EventBadge />} />
         <Route path='/events-scanner' element={<EventScanner />} />
+        <Route path='/event-timer' element={<CountdownTimer />} />
         {/* Rutas protegidas */}
         {/* Ruta para paginas no encontradas */}
         <Route path='*' element={ <Navigate to='/'/> } />

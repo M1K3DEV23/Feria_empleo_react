@@ -16,9 +16,32 @@ const QrReader = () => {
   // Resultado
   const [scannedResult, setScannedResult] = useState<string | undefined>('');
 
-  const onScanSuccess = (result: QrScanner.ScanResult) => {
-    console.log(result);
+  const onScanSuccess = async (result: QrScanner.ScanResult) => {
     setScannedResult(result?.data);
+
+    // Obtener el token de verificacion y el curp del localStorage
+    const token = localStorage.getItem('token');
+    const curp = localStorage.getItem('usuario');
+
+    // Enviar la solicitud a la api
+    try {
+      const response = await fetch(`http://localhost:3000/eventos/${result.data}/asistencia`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ curp })
+      });
+
+      if (response.ok) {
+        console.log('Assitencia registrada correctamente');
+      } else {
+        console.error('Error al registrar la asistencia');
+      }
+    } catch(err) {
+      console.error('Error en la solicitud: ', err);
+    }
   }
 
   // Fail

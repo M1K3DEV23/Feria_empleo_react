@@ -34,6 +34,7 @@
 }
 
 .events__search-input {
+  /* border: 1px solid red; */
   width: 100%;
   padding: 0.8rem;
   border: 1px solid var(--verde-400);
@@ -109,5 +110,9 @@
 
   .events__item-title {
     font-size: 1.125rem;
+  }
+
+  .events__search {
+    width: 55%;
   }
 }

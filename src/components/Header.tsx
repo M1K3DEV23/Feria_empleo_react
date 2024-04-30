@@ -35,6 +35,9 @@ const Header: React.FC = () => {
             <li className="header__nav-menu-item">
               <Link to='/events'  className="header__nav-menu-link">Eventos</Link>
             </li>
+            <li className="header__nav-menu-item">
+              <Link to='/event-timer'  className="header__nav-menu-link">Próximo</Link>
+            </li>
             {
               isLoggendIn && (
                 <>
