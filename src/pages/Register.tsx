@@ -22,6 +22,20 @@ interface RegistrationData {
 import '../styles/Register.css';
 import { motion } from 'framer-motion';
 
+// Importando tooltips
+import { ToastContainer, ToastOptions, Zoom, toast } from 'react-toastify';
+import 'react-toastify/ReactToastify.min.css';
+
+const toastOptions: ToastOptions = {
+  position: 'top-center',
+  autoClose: 2000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: false,
+  pauseOnFocusLoss: false,
+  transition: Zoom
+}
+
 const Register: React.FC = () => {
 
   const [registrationData, setRegistrationData] = useState<RegistrationData>({
@@ -70,20 +84,22 @@ const Register: React.FC = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        console.log(data);
         throw new Error(`Error: ${response.status}`);
       }
       console.log('Registration successful: ', data);
+      toast.success(data.message, toastOptions);
       // Aquí puedes manejar la respuesta del servidor, como redirigir al usuario a la página de inicio o mostrar un mensaje de éxito
     } catch (error) {
       console.error('Registration failed: ', error);
       // Aquí puedes manejar errores de red o de validación del servidor.
+      toast.warn('Error al registrarse', toastOptions);
     }
   }
 
   return (
     <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
       <div className='register'>
+        <ToastContainer />
         <h2 className='register__title'>Registro Usuario</h2>
         <div className='register__content'>
           <form className='register__form' onSubmit={handleSubmit}>

@@ -84,3 +84,26 @@ h6 {
 p {
   text-wrap: pretty;
 }
+
+.container-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.btn-reader {
+  text-decoration: none;
+  padding: 0.5rem 0.6rem;
+  background-color: var(--verde-500);
+  color: var(--blanco-50);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-reader:hover {
+  background-color: var(--dorado-700);
+}

@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/roboto": "^5.0.13",
     "framer-motion": "^11.1.7",
+    "lucide-react": "^0.376.0",
     "qr-scanner": "^1.4.2",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",

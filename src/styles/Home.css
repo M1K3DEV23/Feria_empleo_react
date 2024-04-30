@@ -1,24 +1,147 @@
 .home {
   /* border: 1px solid red; */
   width: 100%;
-  height: 100dvh;
-  padding: 1rem;
+  min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 }
 
-.home h1 {
+.home__container {
+  /* border: 1px solid blue; */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home__content {
+  /* border: 1px solid red; */
+  width: 100%;
+  height: auto;
+}
+
+.home__title {
   font-size: 3rem;
   color: var(--dorado-800);
   text-align: center;
   text-transform: capitalize;
 }
 
-
-.home p {
+.home__content p {
+  font-size: 20px;
   text-align: center;
   color: var(--verde-600);
+}
+
+.home__content p span {
+  color: var(--verde-500);
+}
+
+.home__objective {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.home__objective-title {
+  color: var(--dorado-700);
+  font-size: 24px;
+  margin-bottom: 2rem;
+}
+
+.home__objective-description {
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 400px;
+  margin: 0 auto;
+  color: var(--verde-600);
+}
+
+.home__contact {
+  /* border: 1px solid aqua; */
+  width: 80%;
+  height: auto;
+  margin-top: 2rem;
+
+}
+
+.home__contact h2 {
+  font-size: 24px;
+  color: var(--dorado-700);
+}
+
+.home__contact-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  /* border: 1px solid green; */
+  height: auto;
+  place-items: stretch;
+}
+
+.home__contact-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: left;
+  /* border: 1px solid blue; */
+}
+
+.home__contact-item-title {
   font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--verde-500);
+  font-weight: bold;
+}
+
+.home__contact-item-info {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.home__social {
+  /* border: 1px solid firebrick; */
+  margin-top: 2rem;
+}
+
+.home__social-title {
+  font-size: 24px;
+  color: var(--dorado-700);
+}
+
+.home__social-icons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.home__social-icon {
+  color: var(--verde-500);
+  font-size: 24px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.home__social-icon:hover {
+  color: #007bff;
+  transform: scale(1.8);
+}
+
+@media screen and (max-width: 768px) {
+  .home__title {
+    font-size: 2.5rem;
+  }
+
+  .home__content p {
+    font-size: 18px;
+  }
 }
