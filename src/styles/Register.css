@@ -31,6 +31,19 @@
   place-items: center;
 }
 
+.register__form-group label {
+  display: block;
+  font-weight: bold;
+  color: var(--verde-500);
+  font-size: 18px;
+  margin-bottom: 1rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.register__form-group label:hover {
+  color: var(--rojo-400);
+}
+
 .register__form-input,
 .register__form-select {
   padding: 0.9rem;
@@ -55,8 +68,15 @@
   box-shadow: 0 0 2px var(--verde-500);
 }
 
+.register__form-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+}
+
 .register__form-btn button {
-  padding: 0.7rem 4rem;
+  padding: 1rem 5rem;
   background-color: var(--verde-500);
   color: var(--blanco-50);
   border: none;
@@ -93,7 +113,7 @@
   color: var(--dorado-700);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
   .register__title {
     font-size: 2rem;
   }

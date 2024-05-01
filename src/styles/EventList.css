@@ -85,6 +85,36 @@
   color: var(--dorado-800);
 }
 
+.events__item-description {
+  text-align: justify;
+  font-size: 16px;
+  color: var(--verde-600);
+}
+
+.events__item-location {
+  text-align: left;
+  color: var(--verde-600);
+}
+
+.events__item-location span {
+  color: var(--verde-500);
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.events__item-date {
+  text-align: left;
+  color: var(--verde-600);
+}
+
+.events__item-date span {
+  color: var(--verde-500);
+  font-size: 16px;
+  font-weight: 300;
+}
+
+
+
 .events__item-register {
   margin-top: 0.5rem;
   display: block;

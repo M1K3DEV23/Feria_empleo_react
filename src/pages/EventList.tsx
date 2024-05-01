@@ -35,7 +35,20 @@ const EventList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [currentEvent, setCurrentEvent] = useState<Event | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isRegistered, setIsRegisteres] = useState(false);
   // const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkUserLoggedIn = () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        setIsRegisteres(true);
+      } else {
+        setIsRegisteres(false);
+      }
+    };
+    checkUserLoggedIn();
+  }, [])
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -65,7 +78,7 @@ const EventList: React.FC = () => {
         });
         setEvents(formattedEvents);
       } catch (error) {
-        console.error('Error fetching events: ', error)
+        console.error('Error fetching events: ', error);
       }
     };
 
@@ -118,6 +131,7 @@ const EventList: React.FC = () => {
   return (
     <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.3 } }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
       <div className="events">
+        <ToastContainer />
         <h2 className="events__title">Eventos Disponibles</h2>
         <div className="events__search">
           <span className="events__search-icon"><i></i></span>
@@ -130,15 +144,18 @@ const EventList: React.FC = () => {
             <div  className="events__item" key={evento.id}>
               <h3 className="events__item-title">{evento.nombre}</h3>
               <p className="events__item-description">{evento.descripcion}</p>
-              <p className="events__item-location"><strong>Ubicacion &bull;</strong>{evento.ubicacion}</p>
-              <p className="events__item-date"><strong>Fecha:</strong>{evento.fecha}</p>
-              <p className="events__item-date"><strong>Horario:</strong>{evento.hora}</p>
-              <button onClick={() => openModalWithEvent(evento)} className="events__item-register" type="button">Registro</button>
+              <p className="events__item-location"><span>Ubicacion</span> &bull; {evento.ubicacion}</p>
+              <p className="events__item-date"><span>Fecha</span> &bull; {evento.fecha}</p>
+              <p className="events__item-date"><span>Horario</span> &bull; {evento.hora}</p>
+              {
+                isRegistered && (
+                  <button onClick={() => openModalWithEvent(evento)}className="events__item-register" type="button">Registro</button>
+                )
+              }
             </div>
             ))
           }
         </div>
-        <ToastContainer />
         <Modal isOpen={isModalOpen} onClose={closeModal}>
           {
             currentEvent && (

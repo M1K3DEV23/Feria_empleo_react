@@ -14,8 +14,13 @@
 
 /* Menu normal */
 .header__nav-menu-list {
-  display: flex;
+  /* border: 1px solid red; */
+  padding: 0;
   list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -71,9 +76,5 @@
 
   .header__logo img {
     width: 16rem;
-  }
-
-  .header__nav-menu-list {
-    gap: 1rem;
   }
 }

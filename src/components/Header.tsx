@@ -36,7 +36,7 @@ const Header: React.FC = () => {
               <Link to='/events'  className="header__nav-menu-link">Eventos</Link>
             </li>
             <li className="header__nav-menu-item">
-              <Link to='/event-timer'  className="header__nav-menu-link">Próximo</Link>
+              <Link to='/event-timer'  className="header__nav-menu-link">Próximo Evento</Link>
             </li>
             {
               isLoggendIn && (
@@ -44,9 +44,9 @@ const Header: React.FC = () => {
                   <li className="header__nav-menu-item">
                     <Link to='/event-badge'  className="header__nav-menu-link">Gafete</Link>
                   </li>
-                  <li className="header__nav-menu-item">
+                  {/* <li className="header__nav-menu-item">
                     <Link to='/events-scanner'  className="header__nav-menu-link">Escaner</Link>
-                  </li>
+                  </li> */}
                 </>
               )
             }
